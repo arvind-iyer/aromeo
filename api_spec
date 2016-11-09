@@ -1,0 +1,9 @@
+
+Task Object:
+Params: 
+    title :: String
+    description :: String 
+    crontime :: String (cron format)
+    duration :: int (seconds)
+    aroma :: int[5]
+    
