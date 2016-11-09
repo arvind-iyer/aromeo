@@ -1,0 +1,16 @@
+{
+  "name": "aromeoclient",
+  "version": "1.0.0",
+  "description": "Client application for job scheduling using cron-like tasks",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arvind Iyer",
+  "license": "ISC",
+  "dependencies": {
+    "cron": "^1.1.1",
+    "node-cron": "^1.1.2",
+    "request": "^2.78.0"
+  }
+}
