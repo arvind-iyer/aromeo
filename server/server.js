@@ -1,27 +1,51 @@
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
-var loki = require('lokijs');
+var mongo = require('mongodb');
+var monk = requier('monk');
+
+var app = express();
 
 app.use(bodyParser.json());
 
-var db = new loki('tasks.db');
-var tasks = db.getCollection('tasks');
-if(tasks==null) {
-    tasks = db.addCollection('tasks');
-}
+//Make database accessible to router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
 
+
+//var db = new loki('tasks.db');
+const db = monk(process.env.MONGODB_URI || "mongodb://localhost:27017/aromeo");
+const tasks = db.get('tasks');
+
+
+// var tasks = db.getCollection('tasks');
+// if(tasks==null) {
+//     tasks = db.addCollection('tasks');
+// }
+//db.saveDatabase();
 app.get('/', function(req,res) {
     res.type('text/plain');
     res.send('Aromeo!');
 });
 
 app.get('/tasks', function(req,res) {
-    res.json(tasks.find());
+
+    tasks.find({}, {}, function(e, data) {
+        res.json(data);
+    });
 });
 
 
 app.get('/tasks/:id', function(req,res) {
+    tasks.count(function(err, count) {
+        if(count > req.params.id && req.params.id >= 0) {
+            //res.json(tasks.get)
+            res.statusCode = 404;
+            return res.send('Error 404: No task found');
+        }
+
+    });
     if(tasks.count() <= req.params.id || req.params.id < 0) {
         res.statusCode = 404;
         return res.send('Error 404: No task found');

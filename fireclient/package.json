@@ -1,0 +1,15 @@
+{
+  "name": "fireclient",
+  "version": "1.0.0",
+  "description": "Prototype client for aromeo using firebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arvind Iyer",
+  "license": "ISC",
+  "dependencies": {
+    "cron": "^1.1.1",
+    "firebase": "^3.6.0"
+  }
+}

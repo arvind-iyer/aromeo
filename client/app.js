@@ -4,7 +4,7 @@ var request = require('request');
 var jobs = [];
 new CronJob('30 * * * * *', function() {
 
-    request('http://aromeo123123.herokuapp.com/tasks', function(error, response, body) {
+    request('http://aromeo.herokuapp.com/tasks', function(error, response, body) {
         if(!error && response.statusCode == 200) {
             console.log(body);
             jobs = JSON.parse(body);
