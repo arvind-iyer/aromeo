@@ -25,20 +25,26 @@ var jobs = [];
 function addJobForTask(tRef) {
     var matching = jobs.filter(function(job) {
         if (job.key == tRef.key) {
-            console.log("Pausing task while updating it's new data");
+            console.log("Pausing task while updating its new data");
             job.stop();
             return true;
         }
         return false;
     }); 
+    var cronGen = function(ctime) {
+	carr = ctime.split(' ');
+	carr[carr.length - 4] = "*/2";
+	return carr.join(' ');
+    };
 
     var task = tRef.val();
     console.log("Created cron task");
-    var job = new CronJob(task.crontime, function() {
+    var job = new CronJob(cronGen(task.crontime), function() {
         console.log("Running task: ", task.title, "...");
-        console.log("Activating aromas ", task.aroma, " for ", task.duration, " seconds");
+        console.log("Activating aromas ", task.aroma, " for ", task.duration, " minutes");
         setTimeout(function(){
-            console.log("Completed task ", task.title);
+	    console.log("Ended task");
+            job.stop();
         }, task.duration*1000);
      }, function(){}, true, 'Asia/Hong_Kong'
     );
