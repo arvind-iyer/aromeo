@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "cron": "^1.1.1",
-    "firebase": "^3.6.0"
+    "firebase": "^3.6.0",
+    "python-shell": "^0.4.0"
   }
 }

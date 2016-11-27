@@ -1,3 +1,4 @@
+var PythonShell = require('python-shell');
 var firebase = require('firebase');
 var CronJob = require('cron').CronJob;
 var config = {
@@ -42,6 +43,9 @@ function addJobForTask(tRef) {
     var job = new CronJob(cronGen(task.crontime), function() {
         console.log("Running task: ", task.title, "...");
         console.log("Activating aromas ", task.aroma, " for ", task.duration, " minutes");
+        PythonShell.run('hw.py', {args: task.aroma}, function(err, res) {
+            console.log(results);
+        });
         setTimeout(function(){
 	    console.log("Ended task");
             job.stop();
