@@ -49,7 +49,7 @@ function addJobForTask(tRef) {
         setTimeout(function(){
 	    console.log("Ended task");
             job.stop();
-        }, task.duration*1000);
+        }, task.duration*1000*60);
      }, function(){}, true, 'Asia/Hong_Kong'
     );
 
